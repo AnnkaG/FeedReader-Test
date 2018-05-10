@@ -10,10 +10,10 @@ How to run the test:
 
 1. Locally:
 
- a/ click "Clone in Desktop/Download ZIP" button, save the files on your computer
+ a/ click "Clone or downolad", select Open in Desktop/Download ZIP button, save the files on your computer
     and open index.html file in the browser.
 
  b/ or clone this repo  - open your terminal and run the command
-    git clone https://github.com/annkag/frontend-nanodegree-feedreader
+    git clone https://github.com/annkag/feedreader-test.git
     
 2. Online version you can find at 
