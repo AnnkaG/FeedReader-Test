@@ -13,6 +13,10 @@ $(function() {
     * a related set of tests. This suite is all about the RSS
     * feeds definitions, the allFeeds variable in our application.
     */
+    
+    
+    // 'RSS feed' tests Suite
+    //************************************************************
     describe('RSS Feeds', function() {
         /* This is our first test - it tests to make sure that the
          * allFeeds variable has been defined and that it is not
@@ -31,15 +35,30 @@ $(function() {
          * in the allFeeds object and ensures it has a URL defined
          * and that the URL is not empty.
          */
-
+        it('URL not empty and defined', function(){
+           allFeeds.forEach(function(el){
+           expect(el.url).toBeDefined();
+           expect(el.url.length).toBeGreaterThan(0);    
+           });   
+         });
 
         /* TODO: Write a test that loops through each feed
          * in the allFeeds object and ensures it has a name defined
          * and that the name is not empty.
          */
+        it('name defined and not empty', function(){
+           allFeeds.forEach(function(el){
+           expect(el.name).toBeDefined();
+           expect(el.name.length).toBeGreaterThan(0);    
+           });   
+         });
+        
     });
 
-
+    
+    // 'The Menu' Tests Suite
+    //*****************************************************************
+    describe('The menu', function() {
     /* TODO: Write a new test suite named "The menu" */
 
         /* TODO: Write a test that ensures the menu element is
@@ -47,12 +66,31 @@ $(function() {
          * the CSS to determine how we're performing the
          * hiding/showing of the menu element.
          */
-
+        it('is hidden', function() {
+            expect($('body').attr('class')).toEqual('menu-hidden');
+        });
+        
          /* TODO: Write a test that ensures the menu changes
           * visibility when the menu icon is clicked. This test
           * should have two expectations: does the menu display when
           * clicked and does it hide when clicked again.
           */
+        
+        it('changes visibility', function() {
+           // invisible
+            expect($('body').attr('class')).toEqual('menu-hidden');
+           
+           // visible after click    
+            $('.menu-icon-link').click();
+            
+            expect($('body').attr('class')).not.toEqual('menu-hidden');
+        });
+ });
+        
+    // 'Initial Entries' Tests Suite
+    //*****************************************************************
+    describe('Initial Entries', function() {  
+       
 
     /* TODO: Write a new test suite named "Initial Entries" */
 
@@ -62,11 +100,45 @@ $(function() {
          * Remember, loadFeed() is asynchronous so this test will require
          * the use of Jasmine's beforeEach and asynchronous done() function.
          */
-
+        beforeEach(function(done){ 
+            loadFeed(0,function(){
+              done();
+              });
+            });
+        
+        it('at least single entry in .feed container', function(done){
+            expect(allFeeds.length).not.toBe(0);
+            done();       
+            });
+        });     
+        
+    // 'New Feed' Selection Suite
+    //*****************************************************************   
+      describe('New Feed Selection', function() {  
+        var originalArray;
+        var newArray;
+        
+        
     /* TODO: Write a new test suite named "New Feed Selection" */
 
         /* TODO: Write a test that ensures when a new feed is loaded
          * by the loadFeed function that the content actually changes.
          * Remember, loadFeed() is asynchronous.
          */
+        beforeEach(function(done){ 
+            originalArray = allFeeds;
+            loadFeed(0,function(){
+            done();
+            newArray = allFeeds;
+            });
+        });
+          
+        it('changed content after load', function(done){
+            expect(originalArray).not.toEqual(newArray);
+            done();       
+            });
+        });   
+           
+    
+
 }());
