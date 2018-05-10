@@ -17,3 +17,4 @@ How to run the test:
     git clone https://github.com/annkag/feedreader-test.git
     
 2. Online version you can find at 
+   https://annkag.github.io/FeedReader-Test/
