@@ -105,11 +105,14 @@ $(function() {
          * actually changes.
          */
         beforeEach(function(done){ 
-            originalFeed = $('.feed').html();
-            loadFeed(0,function(){
-            done();
-            newArray = $('.feed').html();
-            });
+           loadFeed(0,function(){
+             originalFeed = $('.feed').html();
+             done();
+           });   
+           loadFeed(1,function(){
+             newFeed = $('.feed').html();
+           done();
+           });    
         });
           
         it('changed content after load', function(done){
