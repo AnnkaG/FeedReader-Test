@@ -60,13 +60,13 @@ $(function() {
         /* Test that menu element changes visibilty on click
           */
         it('changes visibility', function() {
-           // invisible
-            expect($('body').hasClass('menu-hidden')).toBe(true);
-           
-           // visible after click    
+           // visible after click
             $('.menu-icon-link').click();
-            
-            expect($('body').hasClass('menu-hiden')).not.toBe(true);
+            expect($('body').hasClass('menu-hidden')).not.toBe(true);
+           
+           // hidden after another click    
+            $('.menu-icon-link').click();
+            expect($('body').hasClass('menu-hidden')).toBe(true);
         });
  });
     
@@ -106,21 +106,17 @@ $(function() {
          */
         beforeEach(function(done){ 
            loadFeed(0,function(){
-             originalFeed = $('.feed').html();
-             done();
+               originalFeed = $('.feed').html();
+               loadFeed(1,function(){
+                   newFeed = $('.feed').html();
+                   done();
+               });  
            });   
-           loadFeed(1,function(){
-             newFeed = $('.feed').html();
-           done();
-           });    
         });
           
-        it('changed content after load', function(done){
+        it('changed content after load', function(){
             expect(originalFeed).not.toEqual(newFeed);
-            done();       
-            });
+           });
         });   
            
-    
-
 }());
